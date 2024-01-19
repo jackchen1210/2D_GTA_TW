@@ -8,11 +8,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField]private float moveSpeed=1;
     private PlayerControls playerControl;
+    private int moveXAnimatorHash;
+    private int moveYAnimatorHash;
     private Vector2 movement;
 
     private void Awake()
     {
         playerControl = new PlayerControls();
+        moveXAnimatorHash = Animator.StringToHash("MoveX");
+        moveYAnimatorHash = Animator.StringToHash("MoveY");
     }
 
     private void OnEnable()
@@ -27,8 +31,8 @@ public class PlayerController : MonoBehaviour
     private void PlayerInput()
     {
         movement = playerControl.Movement.Move.ReadValue<Vector2>();
-        animator.SetFloat("MoveX",movement.x);
-        animator.SetFloat("MoveY",movement.y);
+        animator.SetFloat(moveXAnimatorHash, movement.x);
+        animator.SetFloat(moveYAnimatorHash, movement.y);
     }
 
     private void FixedUpdate()
