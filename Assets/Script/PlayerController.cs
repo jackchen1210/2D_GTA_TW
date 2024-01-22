@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField]private float moveSpeed=1;
+    [SerializeField] private WeaponController weaponController;
     private PlayerControls playerControl;
     private int moveXAnimatorHash;
     private int moveYAnimatorHash;
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
         playerControl = new PlayerControls();
         moveXAnimatorHash = Animator.StringToHash("MoveX");
         moveYAnimatorHash = Animator.StringToHash("MoveY");
+        playerControl.Movement.Attack.started += Attack_started;
     }
 
     private void OnEnable()
@@ -30,9 +32,23 @@ public class PlayerController : MonoBehaviour
     }
     private void PlayerInput()
     {
-        movement = playerControl.Movement.Move.ReadValue<Vector2>();
+        PlayerMove();
+    }
+    private void PlayerMove()
+    {
+        var movement = playerControl.Movement.Move.ReadValue<Vector2>();
+        if (movement == this.movement)
+        {
+            return;
+        }
+        this.movement = movement;
         animator.SetFloat(moveXAnimatorHash, movement.x);
         animator.SetFloat(moveYAnimatorHash, movement.y);
+    }
+
+    private void Attack_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        weaponController.Attack();
     }
 
     private void FixedUpdate()
@@ -51,6 +67,10 @@ public class PlayerController : MonoBehaviour
         var mousePos = Input.mousePosition;
         var playerScreenPoint = Camera.main.WorldToScreenPoint(transform.position);
 
-        spriteRenderer.flipX = mousePos.x < playerScreenPoint.x;
+        var isFlipX = mousePos.x < playerScreenPoint.x;
+        spriteRenderer.flipX = isFlipX;
+
+        var angle = MathF.Atan2(mousePos.y, mousePos.x)* Mathf.Rad2Deg;
+        weaponController.FlipXAndAngle(isFlipX, angle);
     }
 }
