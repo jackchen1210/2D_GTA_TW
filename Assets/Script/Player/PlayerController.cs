@@ -1,24 +1,50 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField]private float moveSpeed=1;
     [SerializeField] private WeaponController weaponController;
+    [SerializeField] private PlayerDash playerDash;
+    [SerializeField] private float moveSpeed = 1;
+    [SerializeField] private float dashSpeed = 4;
     private PlayerControls playerControl;
     private int moveXAnimatorHash;
     private int moveYAnimatorHash;
     private Vector2 movement;
+    private static PlayerController instance;
+
+    public static PlayerController GetInstance()
+    {
+        return instance;
+    }
 
     private void Awake()
     {
+        instance = this;
         playerControl = new PlayerControls();
         moveXAnimatorHash = Animator.StringToHash("MoveX");
         moveYAnimatorHash = Animator.StringToHash("MoveY");
-        playerControl.Movement.Attack.started += Attack_started;
+        playerControl.Combat.Attack.started += Attack_started;
+        playerControl.Movement.Dash.performed += Dash_performed;
+    }
+
+    private void Dash_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        StartCoroutine(PerformDash());
+    }
+
+    private IEnumerator PerformDash()
+    {
+        moveSpeed *= dashSpeed;
+        playerDash.Show();
+        yield return new WaitForSeconds(0.2f);
+        moveSpeed /= dashSpeed;
+        playerDash.Hide();
     }
 
     private void OnEnable()
@@ -59,7 +85,7 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        rb.MovePosition(rb.position+movement*(moveSpeed*Time.fixedDeltaTime));
+        rb.MovePosition(rb.position + movement * (moveSpeed * Time.fixedDeltaTime));
     }
 
     private void AdjustPlayerFacingDirection()
@@ -70,7 +96,7 @@ public class PlayerController : MonoBehaviour
         var isFlipX = mousePos.x < playerScreenPoint.x;
         spriteRenderer.flipX = isFlipX;
 
-        var angle = MathF.Atan2(mousePos.y, mousePos.x)* Mathf.Rad2Deg;
+        var angle = MathF.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
         weaponController.FlipXAndAngle(isFlipX, angle);
     }
 }

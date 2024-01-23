@@ -15,6 +15,10 @@ GameObject:
   - component: {fileID: 7947274002748903897}
   - component: {fileID: 6737461897584694606}
   - component: {fileID: 4713114664990278221}
+  - component: {fileID: 8808041222579514941}
+  - component: {fileID: 5825203600639655660}
+  - component: {fileID: 7574001328397730100}
+  - component: {fileID: 8132103164273649334}
   m_Layer: 0
   m_Name: Blue Slime
   m_TagString: Untagged
@@ -164,6 +168,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPathFinding: {fileID: 6737461897584694606}
+  enemyHealth: {fileID: 8808041222579514941}
+  knockBack: {fileID: 5825203600639655660}
+  flash: {fileID: 7574001328397730100}
+  deathVFX: {fileID: 8132103164273649334}
 --- !u!114 &6737461897584694606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,6 +184,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36c609bdc5fc9244d822550f6a536746, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEnable: 1
+  knockBack: {fileID: 5825203600639655660}
   rg: {fileID: 1067700270591012904}
   moveSpeed: 2
 --- !u!95 &4713114664990278221
@@ -199,3 +209,57 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8808041222579514941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6724162207438060996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1907d3659a35916479c42cfa87ab711e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 3
+--- !u!114 &5825203600639655660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6724162207438060996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae9a006ba5100a841a121ba495265df8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rg: {fileID: 1067700270591012904}
+  knockbackTime: 0.2
+--- !u!114 &7574001328397730100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6724162207438060996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb133b1788cee8840b20989df12544f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 353212195501034587}
+  whiteMat: {fileID: 2100000, guid: bca403dfbcc16a9458ba25b7295b9b75, type: 2}
+--- !u!114 &8132103164273649334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6724162207438060996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08b3356c0fdffea45830334b1098f69d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathPsPrefab: {fileID: 1401077853987758282, guid: da8b2a8eb291bbc409bd821b6623a7d9, type: 3}

@@ -821,6 +821,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Blue Slime
       objectReference: {fileID: 0}
+    - target: {fileID: 6737461897584694606, guid: 5af55e4fdb8d92342b26b254d1756770, type: 3}
+      propertyPath: isEnable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7947274002748903897, guid: 5af55e4fdb8d92342b26b254d1756770, type: 3}
       propertyPath: health
       value: 3

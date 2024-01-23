@@ -15,9 +15,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Attack",
+                    "name": "Dash",
                     "type": "Button",
-                    "id": "65caffd9-5fd9-4573-8efa-4c5eeedfaf36",
+                    "id": "6283e1f5-a699-464a-870b-d066496a438d",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -93,7 +93,35 @@
                 },
                 {
                     "name": "",
-                    "id": "01fe61fd-f383-4f6b-939d-173044e24460",
+                    "id": "fbb8a096-5788-4ea3-9c46-8f864a41a39a",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Combat",
+            "id": "13318a01-dfc3-4daf-8fcf-430179ad4aab",
+            "actions": [
+                {
+                    "name": "Attack",
+                    "type": "Button",
+                    "id": "db83d9e4-dfc2-4c95-b165-67b4b884529d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "62383fe3-cead-427c-b869-439596d2a04c",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",

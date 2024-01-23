@@ -10,16 +10,17 @@ public class BlueSlimeAI : MonoBehaviour
     }
 
     [SerializeField] private EnemyPathFinding enemyPathFinding;
-    [SerializeField] private int health=3;
+    [SerializeField] private EnemyHealth enemyHealth;
+    [SerializeField] private KnockBack knockBack;
+    [SerializeField] private Flash flash;
+    [SerializeField] private DeathVFX deathVFX;
 
     private State currentState;
     private WaitForSeconds waitFor2Seconds = new WaitForSeconds(2);
-    private int currentHealth;
     private void Start()
     {
         currentState = State.Roaming;
         StartCoroutine(ChangeTargetPos());
-        currentHealth = health;
     }
 
     private IEnumerator ChangeTargetPos()
@@ -39,15 +40,19 @@ public class BlueSlimeAI : MonoBehaviour
 
     internal void Damage(int dmg)
     {
-        currentHealth -= dmg;
-        if (currentHealth <= 0)
+        flash.DoFlash();
+        enemyHealth.Damage(dmg);
+        knockBack.DoKnockBack(PlayerController.GetInstance().transform,15f);
+
+        if (enemyHealth.CurrentHealth <= 0)
         {
-            Death();
+            SelfDestroy();
         }
     }
 
-    private void Death()
+    private void SelfDestroy()
     {
-        Destroy(gameObject);
+        deathVFX.Show();
+        enemyHealth.Death();
     }
 }
