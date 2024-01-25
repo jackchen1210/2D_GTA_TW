@@ -2,11 +2,13 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviourSingleton<PlayerController>
 {
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer spriteRenderer;
+
+
     [SerializeField] private WeaponController weaponController;
     [SerializeField] private PlayerDash playerDash;
     [SerializeField] private float moveSpeed = 1;
@@ -15,16 +17,9 @@ public class PlayerController : MonoBehaviour
     private int moveXAnimatorHash;
     private int moveYAnimatorHash;
     private Vector2 movement;
-    private static PlayerController instance;
 
-    public static PlayerController GetInstance()
+    protected override void OnAwake()
     {
-        return instance;
-    }
-
-    private void Awake()
-    {
-        instance = this;
         playerControl = new PlayerControls();
         moveXAnimatorHash = Animator.StringToHash("MoveX");
         moveYAnimatorHash = Animator.StringToHash("MoveY");
@@ -97,5 +92,9 @@ public class PlayerController : MonoBehaviour
 
         var angle = MathF.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
         weaponController.FlipXAndAngle(isFlipX, angle);
+    }
+    internal void SetPosition(Vector3 position)
+    {
+        transform.position = position;
     }
 }

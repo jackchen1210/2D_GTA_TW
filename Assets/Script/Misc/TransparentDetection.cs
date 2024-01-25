@@ -23,7 +23,7 @@ public abstract class TransparentDetection : MonoBehaviour
 
     private bool IsPlayer(Collider2D collision)
     {
-        return collision.CompareTag("Player");
+        return Tool.IsPlayer(collision);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
