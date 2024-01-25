@@ -1,21 +1,25 @@
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public abstract class TransparentDetection : MonoBehaviour
 {
-    [Range(0f, 1f)][SerializeField] private float alpha = 0.8f;
+    [Range(0f, 1f)] [SerializeField] private float alpha = 0.8f;
     private float fadedTime = 0.4f;
+    private Tween fadeOutTween;
+    private Tween fadeInTween;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (IsPlayer(collision))
         {
-            FadeOutColor(new Color(1,1,1, alpha), fadedTime);
+            fadeOutTween?.Kill();
+            fadeOutTween = FadeOutColor(new Color(1, 1, 1, alpha), fadedTime);
         }
     }
 
-    protected abstract void FadeOutColor(Color fadedColor, float fadedTime);
-    protected abstract void FadeInColor(Color fadedColor, float fadedTime);
+    protected abstract Tween FadeOutColor(Color fadedColor, float fadedTime);
+    protected abstract Tween FadeInColor(Color fadedColor, float fadedTime);
 
     private bool IsPlayer(Collider2D collision)
     {
@@ -26,7 +30,15 @@ public abstract class TransparentDetection : MonoBehaviour
     {
         if (IsPlayer(collision))
         {
-            FadeInColor(Color.white, fadedTime);
+            fadeInTween?.Kill();
+            fadeInTween = FadeInColor(Color.white, fadedTime);
         }
     }
+
+    private void OnDestroy()
+    {
+        fadeOutTween?.Kill();
+        fadeInTween?.Kill();
+    }
+
 }

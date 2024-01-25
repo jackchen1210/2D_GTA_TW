@@ -6,13 +6,13 @@ public class TileMapTransparentDetection : TransparentDetection
 {
     [SerializeField] private Tilemap tilemap;
 
-    protected override void FadeInColor(Color fadedColor, float fadedTime)
+    protected override Tween FadeInColor(Color fadedColor, float fadedTime)
     {
-        DOTween.To(()=>tilemap.color,_=>tilemap.color = _,fadedColor,fadedTime);
+        return DOTween.To(() => tilemap.color, _ => tilemap.color = _, fadedColor, fadedTime);
     }
 
-    protected override void FadeOutColor(Color fadedColor, float fadedTime)
+    protected override Tween FadeOutColor(Color fadedColor, float fadedTime)
     {
-        DOTween.To(() => tilemap.color, _ => tilemap.color = _, fadedColor, fadedTime);
+        return DOTween.To(() => tilemap.color, _ => tilemap.color = _, fadedColor, fadedTime);
     }
 }
