@@ -7,6 +7,8 @@ public class AreaEntrance : MonoBehaviour
         if(gameObject.scene.buildIndex == SceneManager.GetInstance().CurrentSceneIndex)
         {
             PlayerController.GetInstance().SetPosition(transform.position);
+            PlayerController.GetInstance().ResetOnNewScene();
+            SceneManager.GetInstance().HideLoadingScreen();
         }
     }
 }

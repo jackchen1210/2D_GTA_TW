@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerDash : MonoBehaviour
@@ -13,4 +14,5 @@ public class PlayerDash : MonoBehaviour
     {
         trailRenderer.emitting = false;
     }
+
 }

@@ -7,6 +7,8 @@ public class CameraManager : MonoBehaviourSingleton<CameraManager>
 
     public void ResetCameraToFollowPlayer()
     {
-        virtualCamera.Follow = PlayerController.GetInstance().transform;
+        var playerTrans = PlayerController.GetInstance().transform;
+        virtualCamera.Follow = playerTrans;
+        virtualCamera.ForceCameraPosition(playerTrans.position,Quaternion.identity);
     }
 }

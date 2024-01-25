@@ -10,16 +10,21 @@ public class PlayerController : MonoBehaviourSingleton<PlayerController>
 
 
     [SerializeField] private WeaponController weaponController;
+
+
     [SerializeField] private PlayerDash playerDash;
     [SerializeField] private float moveSpeed = 1;
     [SerializeField] private float dashSpeed = 4;
+    private float defaultMoveSpeed;
     private PlayerControls playerControl;
     private int moveXAnimatorHash;
     private int moveYAnimatorHash;
     private Vector2 movement;
+    private bool isPlayerActionLock;
 
     protected override void OnAwake()
     {
+        defaultMoveSpeed = moveSpeed;
         playerControl = new PlayerControls();
         moveXAnimatorHash = Animator.StringToHash("MoveX");
         moveYAnimatorHash = Animator.StringToHash("MoveY");
@@ -27,8 +32,22 @@ public class PlayerController : MonoBehaviourSingleton<PlayerController>
         playerControl.Movement.Dash.performed += Dash_performed;
     }
 
+    private void Start()
+    {
+        SceneManager.GetInstance().OnBlackScreenEnableChanged += PlayerController_OnBlackScreenEnableChanged;
+    }
+
+    private void PlayerController_OnBlackScreenEnableChanged(bool blackScreenEnabled)
+    {
+        isPlayerActionLock = blackScreenEnabled;
+    }
+
     private void Dash_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
+        if (isPlayerActionLock)
+        {
+            return;
+        }
         StartCoroutine(PerformDash());
     }
 
@@ -56,6 +75,10 @@ public class PlayerController : MonoBehaviourSingleton<PlayerController>
     }
     private void PlayerMove()
     {
+        if (isPlayerActionLock)
+        {
+            return;
+        }
         var movement = playerControl.Movement.Move.ReadValue<Vector2>();
         if (movement == this.movement)
         {
@@ -68,6 +91,10 @@ public class PlayerController : MonoBehaviourSingleton<PlayerController>
 
     private void Attack_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
+        if (isPlayerActionLock)
+        {
+            return;
+        }
         weaponController.Attack();
     }
 
@@ -96,5 +123,13 @@ public class PlayerController : MonoBehaviourSingleton<PlayerController>
     internal void SetPosition(Vector3 position)
     {
         transform.position = position;
+    }
+    internal void ResetOnNewScene()
+    {
+        moveSpeed = defaultMoveSpeed;
+        movement = Vector2.zero;
+        playerDash.Hide();
+        animator.SetFloat(moveXAnimatorHash,0);
+        animator.SetFloat(moveYAnimatorHash,0);
     }
 }
