@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 6414181835468520192}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -106,9 +106,10 @@ MonoBehaviour:
   rb: {fileID: 7022918299215502668}
   animator: {fileID: 8509632778664719190}
   spriteRenderer: {fileID: 5598673745395201886}
-  moveSpeed: 5
   weaponController: {fileID: 6462486025263879572}
   playerDash: {fileID: 5506981912217585507}
+  moveSpeed: 5
+  dashSpeed: 4
 --- !u!50 &7022918299215502668
 Rigidbody2D:
   serializedVersion: 4
