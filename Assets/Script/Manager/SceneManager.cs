@@ -35,7 +35,7 @@ public class SceneManager : MonoBehaviourSingleton<SceneManager>
         CameraManager.GetInstance().ResetCameraToFollowPlayer();
         isShowBlackScreen = false;
         blackScreenImg.color = Color.black;
-        blackScreenImg.DOFade(0, fadedTime).SetEase(Ease.OutQuad).OnComplete(() =>
+        blackScreenImg.DOFade(0, fadedTime).SetEase(Ease.InQuad).OnComplete(() =>
         {
             blackScreenImg.gameObject.SetActive(false);
             OnBlackScreenEnableChanged?.Invoke(false);
