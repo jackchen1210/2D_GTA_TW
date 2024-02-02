@@ -186,3 +186,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destructVFX: {fileID: 8687047651520620128, guid: b0985595b95f84cf8acca5beadef095f, type: 3}
   destructTime: 10
+  duraction: 0.1
+  strength: 0.5
+  vibrato: 10

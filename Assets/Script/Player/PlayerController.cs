@@ -7,11 +7,7 @@ public class PlayerController : MonoBehaviourSingleton<PlayerController>
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer spriteRenderer;
-
-
     [SerializeField] private WeaponController weaponController;
-
-
     [SerializeField] private PlayerDash playerDash;
     [SerializeField] private float moveSpeed = 1;
     [SerializeField] private float dashSpeed = 4;
