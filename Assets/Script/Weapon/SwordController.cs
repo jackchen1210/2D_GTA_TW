@@ -27,7 +27,7 @@ internal class SwordController : MonoBehaviour, IWeapon
         }
         canAttack = false;
         animator.SetTrigger(attackAniHash);
-        await Task.Delay(150);
+        await Task.Delay(150, destroyCancellationToken);
         slashAnimator.SetTrigger(slashDown);
     }
 

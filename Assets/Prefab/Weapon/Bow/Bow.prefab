@@ -152,3 +152,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 9097774251362732544}
+  arrowPrefab: {fileID: 8709474462650671301, guid: 3c8a1157b1f0dca4ba22994c8b0ea319, type: 3}

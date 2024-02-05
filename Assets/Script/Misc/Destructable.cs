@@ -14,15 +14,7 @@ public class Destructable : MonoBehaviour
     private Tween shakeTween;
     private int currentDestructCounter;
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.TryGetComponent<SwordHitbox>(out var swordHitbox))
-        {
-            Destruct();
-        }
-    }
-
-    private void Destruct()
+    public void Destruct()
     {
         currentDestructCounter++;
         if (currentDestructCounter < destructTime)
