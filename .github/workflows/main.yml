@@ -59,8 +59,8 @@ jobs:
       - name: Download WebGL Artifact
         uses: actions/download-artifact@v3
         with:
-          name: cgs-WebGL
-          path: build/WebGL
+          name: Build
+          path: build
       - name: Copy the WebGL build artifacts to the GitHub Pages directory
         env:
           WEBGL_BUILD_PATH: ${{ format('{0}/build/WebGL', github.workspace) }}
