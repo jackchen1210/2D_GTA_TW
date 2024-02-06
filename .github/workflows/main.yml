@@ -52,7 +52,7 @@ jobs:
   deployToGitHubPages:
     name: Deploy to the Web via GitHub Pages
     runs-on: ubuntu-latest
-    needs: buildWithLinux
+    needs: build
     if: github.event.action == 'published' || (contains(github.event.inputs.workflow_mode, 'release') && contains(github.event.inputs.workflow_mode, 'WebGL'))
     steps:
       - name: Checkout Repository
