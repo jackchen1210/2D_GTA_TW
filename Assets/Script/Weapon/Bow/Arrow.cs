@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class Arrow : MonoBehaviour
@@ -33,7 +34,7 @@ public class Arrow : MonoBehaviour
         }
         transform.right = direction;
         rg.AddForce(direction* speed, ForceMode2D.Impulse);
-        await Task.Delay((int)(1000*disappearTime), destroyCancellationToken);
+        await UniTask.Delay((int)(1000*disappearTime));
         onFlyEnd?.Invoke();
     }
 }

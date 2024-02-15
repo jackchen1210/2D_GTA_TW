@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 internal class SwordController : MonoBehaviour, IWeapon
@@ -27,7 +28,7 @@ internal class SwordController : MonoBehaviour, IWeapon
         }
         canAttack = false;
         animator.SetTrigger(attackAniHash);
-        await Task.Delay(150, destroyCancellationToken);
+        await UniTask.Delay(150);
         slashAnimator.SetTrigger(slashDown);
     }
 
