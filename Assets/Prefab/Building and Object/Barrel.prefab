@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4097238002944076171}
   - component: {fileID: 6625556762146796270}
   - component: {fileID: 2663451649868215309}
+  - component: {fileID: 4031308114565940332}
   m_Layer: 0
   m_Name: Barrel
   m_TagString: Untagged
@@ -134,3 +135,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destructVFX: {fileID: 8687047651520620128, guid: 5b9d0b9124bb25c40b48cbb257658fbb, type: 3}
+  destructTime: 1
+  duraction: 0.1
+  strength: 1
+  vibrato: 10
+--- !u!114 &4031308114565940332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5731496200548749632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5cff9354e29c9640a320d85e66f660b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

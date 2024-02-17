@@ -9,6 +9,8 @@ public class BowController : MonoBehaviour, IWeapon
     private ObjectPool<Arrow> arrowPool;
     private int shootAniHash;
 
+    private float arrow_bow_distance = 1.5f;
+
     private void Awake()
     {
         arrowPool = new ObjectPool<Arrow>(()=> { return Instantiate<Arrow>(arrowPrefab); },OnGetArrow,OnReleaseArrow);
@@ -20,17 +22,34 @@ public class BowController : MonoBehaviour, IWeapon
         arrow.Hide();
     }
 
+    private void FixedUpdate()
+    {
+        var direction = (Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position)).normalized;
+        transform.right = direction;
+    }
+
     private void OnGetArrow(Arrow arrow)
     {
+        var isReleased = false;
+        arrow.OnArrowHitBlocker = ReleaseArrow;
         arrow.Show();
-        arrow.transform.position = transform.position;
         var direction = (Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position)).normalized;
-        arrow.Fly(direction,()=> arrowPool.Release(arrow));
+        arrow.transform.position = transform.position + direction* arrow_bow_distance;
+        arrow.Fly(direction, ReleaseArrow);
+        void ReleaseArrow()
+        {
+            if (isReleased)
+            {
+                return;
+            }
+
+            isReleased = true;
+            arrowPool.Release(arrow);
+        }
     }
 
     public void Attack()
     {
-        Debug.Log("Bow Attack");
         animator.SetTrigger(shootAniHash);
         arrowPool.Get();
     }
